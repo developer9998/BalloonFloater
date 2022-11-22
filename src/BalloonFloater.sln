@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonFloater", "BalloonFloater\BalloonFloater.csproj", "{73A2CF96-21D6-4D81-BB8B-D5F87D22B41F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73A2CF96-21D6-4D81-BB8B-D5F87D22B41F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73A2CF96-21D6-4D81-BB8B-D5F87D22B41F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73A2CF96-21D6-4D81-BB8B-D5F87D22B41F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73A2CF96-21D6-4D81-BB8B-D5F87D22B41F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D411EBE2-3859-4EE2-A57B-0BC7D069213B}
+	EndGlobalSection
+EndGlobal
