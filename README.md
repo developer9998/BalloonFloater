@@ -3,8 +3,9 @@ BalloonFloater is a mod for Gorilla Tag that lets you fly in the air with balloo
 I do not allow this mod to be included in any cheat menu.
 
 ## Details
-- Requires Utilla
-- Only works in modded lobbies
+- Requires Utilla and Computer Interface
+- Fully customizable settings with the CI view
+- Only works in modded lobbies to ensure non-cheating
 - Synched with other players with no additional networking  
 
 ## Notice
