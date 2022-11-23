@@ -1,33 +1,24 @@
 ﻿using BepInEx;
-using BepInEx.Configuration;
-
-using System.IO;
-using System.ComponentModel;
-
-using BalloonFloater.Utils;
 using BalloonFloater.Scripts;
-
+using BalloonFloater.ComputerInterface;
+using Bepinject;
 using Utilla;
-using UnityEngine;
 
 namespace BalloonFloater
 {
-    [ModdedGamemode]
-    [BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
+    [ModdedGamemode] // Requires Utilla
+    [BepInDependency("tonimacaroni.computerinterface", "1.5.3")] // For the Computer Interface view
+    [BepInDependency("org.legoandmars.gorillatag.utilla", "1.6.6")] // For the modded gamemodes
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin Instance;
         public BFManager bfmanager;
-        public BFSettings settings;
+        public BFRecovery recovery;
+        public BFData data;
 
         public bool inRoom;
         public int EquippedBalloons = 0;
-
-        internal ConfigEntry<float> playerGain;
-        internal ConfigEntry<float> playerMaxGain;
-        internal ConfigEntry<float> balloonGain;
-        internal ConfigEntry<float> destroyTime;
 
         internal void Awake()
         {
@@ -36,26 +27,18 @@ namespace BalloonFloater
 
             HarmonyPatches.ApplyHarmonyPatches();
             BFLogger.LogMessage("Applied harmony patches", BFLogger.LogType.Default);
+
+            Zenjector.Install<MainInstaller>().OnProject();
+            BFLogger.LogMessage("Ran MainInstaller", BFLogger.LogType.Default);
         }
 
         internal void Start()
         {
             bfmanager = gameObject.AddComponent<BFManager>();
             BFLogger.LogMessage("Created BFManager", BFLogger.LogType.Default);
-            // BF, boyfriend, balloonfloater, idk
 
-            ConfigFile BFConfig = new ConfigFile(Path.Combine(Paths.ConfigPath, "DevBalloonFloater.cfg"), true);
-            playerGain = BFConfig.Bind("Configuration", "Player Gain", 0.5f, "How much veleocity does the player gain when you're grabbing a balloon");
-            playerMaxGain = BFConfig.Bind("Configuration", "Player Maximum Gain", 3f, "The maximum velocity the player gains when grabbing a balloon");
-            balloonGain = BFConfig.Bind("Configuration", "Balloon Gain", 1.5f, "How much velocity does the balloon gain when you're grabbing it");
-            destroyTime = BFConfig.Bind("Configuration", "Destroy Time", 0.5f, "How long does it take for the balloon to explode after you release it");
-            BFLogger.LogMessage("Loaded configuration files", BFLogger.LogType.Default);
-
-            settings = new BFSettings();
-            settings.playerGain = playerGain.Value;
-            settings.playerMaxGain = playerMaxGain.Value;
-            settings.balloonGain = balloonGain.Value;
-            settings.destroyTime = destroyTime.Value;
+            recovery = new BFRecovery();
+            data = recovery.GetData();
             BFLogger.LogMessage("Generated default settings", BFLogger.LogType.Default);
         }
 

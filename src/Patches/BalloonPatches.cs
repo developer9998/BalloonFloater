@@ -57,13 +57,11 @@ namespace BalloonFloater.Patches
             {
                 Rigidbody rb = Traverse.Create(__instance).Field("rb").GetValue<Rigidbody>();
 
-                if (Plugin.Instance.inRoom)
+                if (Plugin.Instance.bfmanager.rigidbodies.Contains(rb))
                 {
-                    if (Plugin.Instance.bfmanager.rigidbodies.Contains(rb))
-                    {
-                        Plugin.Instance.EquippedBalloons--;
-                        Plugin.Instance.bfmanager.DestroyBalloon(rb);
-                    }
+                    Plugin.Instance.EquippedBalloons--;
+                    if (Plugin.Instance.inRoom) Plugin.Instance.bfmanager.DestroyBalloon(rb);
+                    else Plugin.Instance.bfmanager.rigidbodies.Remove(rb);
                 }
             }
         }
